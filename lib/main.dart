@@ -3,94 +3,64 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-//import the Crypto Card Widget from the CryptoCardWidget.dart file
-import 'CryptoCardWidget.dart';
+import 'cardview.dart';
+import 'loadingwidget.dart';
 
-void main(){
+void main() {
 	runApp(
 		new MaterialApp(
-			home: new HomePage()
+			home: HomePage()
 		)
 	);
 }
 
 class HomePage extends StatefulWidget{
-	@override
 	HomePageState createState() => new HomePageState();
 }
 
 class HomePageState extends State<HomePage>{
+	final String apiUrl = "https://cryptowhalealert.herokuapp.com/api/v1/get";
 
-	String url = "https://cryptowhalealert.herokuapp.com/api/v1/get";
+	Future<String> getPosts() async {
+		var response = await http.get(Uri.parse(apiUrl));
 
-	var jsonData;
-
-	//get the data from the server
-	Future<String> getData() async {
-		http.Response response = await http.get(
-			Uri.parse(url),
-			headers: {
-				"Accept" : "application/json"
-			}
-		);
-
-		//decode json and add it to the list
-		this.setState(() {
-			jsonData = jsonDecode(response.body);
-		});
-
-		print(jsonData["message"]);
-		
-		return "success";
+		return response.body;
 	}
 
-	
-	//make a http request at the start of the app, before anything gets rendered
-	@override
-	void initState(){
-		this.getData();
-	}
 
 	@override
 	Widget build(BuildContext context){
 		return new Scaffold(
-			appBar: AppBar(title: new Text("Crypto Whale Alert"), backgroundColor: Colors.lightGreen[700]),
+			appBar: AppBar(title: Text("Crypto Whale Alert"), backgroundColor: Colors.blueGrey),
 
-			body: new Container(
-				color: Colors.white,
-				child: new Center(
-					child: new Column(
-						children: <Widget> [		
+			body: Container(
+				//create a future builder, it takes two parameters
+				//one is name of the function, in our case it is getPosts
+				//second one is the builder, it takes build context and async snapshot
 
-							Padding(padding: EdgeInsets.only(top:20.0)),
-							
-							new Text(
-								"Following card shows the latest Whale transaction in the blockchain",
-								style: new TextStyle(
-									fontWeight: FontWeight.bold,
-									fontSize: 18,
-									backgroundColor: Colors.amber
-								),
+				child: FutureBuilder(
+					future: getPosts(),
+					builder: (BuildContext context, AsyncSnapshot snapshot){
+						//AsyncSnapshot gives us the data when the future getPosts() gets resolved
+						//lets use ListView builder to show the data
 
-								textAlign: TextAlign.center,
-							),
+						//if data is null, return a loading widget, else return the list
+						if(snapshot.data == null){
+							//return the Circular loading widget
+							return CircularLoader();
+						}
+						else{
 
-							Padding(padding: EdgeInsets.only(top:20.0)),
+							//snapshot will return a String from the http request, convert it to json
+							var jsonData = jsonDecode(snapshot.data);
 
-							new CryptoCardWidget(
-								tweet: jsonData["message"]["tweet"], 
-								hash: jsonData["message"]["hash"], 
-								blockchain: jsonData["message"]["blockchain"],
-								amount: (jsonData["message"]["amount"]).toString(),
-								amount_usd: (jsonData["message"]["amount_usd"]).toString(),
-								from_address: jsonData["message"]["from"],
-								to_address: jsonData["message"]["to"],
-							)
-						]
-					)
-					
-				)
+							//return the cardview
+							return CardView(jsonData:jsonData);
+						}
+					},
+				),
+
 			)
 		);
-	}	
+	}
 }
