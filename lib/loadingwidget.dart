@@ -11,12 +11,13 @@ class CircularLoaderState extends State<CircularLoader>{
 	@override
 	Widget build(BuildContext context){
 		return Container(
+      color: Colors.black,
 			child: Center(
 				child: Column(
 					crossAxisAlignment: CrossAxisAlignment.center,
 					mainAxisAlignment: MainAxisAlignment.center,
 					children: [
-						Text("Fetching the latest information from the blockchain..."),
+						Text("Fetching the latest information from the blockchain...", style: TextStyle(color: Colors.white)),
 						
 						Padding(padding: EdgeInsets.all(8)),
 
@@ -24,12 +25,12 @@ class CircularLoaderState extends State<CircularLoader>{
 							crossAxisAlignment: CrossAxisAlignment.center,
 							mainAxisAlignment: MainAxisAlignment.center,
 							children: <Widget>[
-								Text("Loading...", style: TextStyle(fontSize: 16),),
+								Text("Loading...", style: TextStyle(fontSize: 16, color: Colors.white)),
 								
 								Padding(padding: EdgeInsets.only(right: 10)),
 								
 								CircularProgressIndicator(
-									valueColor: AlwaysStoppedAnimation<Color>(Colors.blueGrey)
+									valueColor: AlwaysStoppedAnimation<Color>(Colors.amber)
 								)
 							],
 						)

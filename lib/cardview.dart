@@ -18,6 +18,7 @@ class CardViewState extends State<CardView>{
 	@override
 	Widget build(BuildContext context){
 		return Container(
+      color: Color(0xff111111),
 			child: new Center(
 				child: new Column(
 					children: <Widget>[
