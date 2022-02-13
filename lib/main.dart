@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'splashscreen.dart';
-
 
 void main() {
 	runApp(
@@ -13,6 +11,4 @@ void main() {
 			home: SplashScreen()
 		)
 	);
-
-  //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 }
