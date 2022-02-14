@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
-	final String apiUrl = "https://cryptowhalealert.herokuapp.com/api/v1/get";
+	final String apiUrl = "https://raw.githubusercontent.com/0xhh/res/master/api.json";
 
 	Future<String> getPosts() async {
 		var response = await http.get(Uri.parse(apiUrl));
@@ -49,9 +49,31 @@ class HomePageState extends State<HomePage>{
 
 							//snapshot will return a String from the http request, convert it to json
 							var jsonData = jsonDecode(snapshot.data);
+							//return the listview that builds cards for the jsonData
 
-							//return the cardview
-							return CardView(jsonData:jsonData);
+              return ListView.builder(
+                itemCount: jsonData == null ? 0 : jsonData.length,
+
+                itemBuilder: (BuildContext context, int index){
+
+                  //if jsonData is null, then return 503 server error
+                  if(jsonData == null){
+                    return Center(
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("503 server error"),
+                        ],
+                      )
+                    );
+                  }
+                  else{
+                    //else, create a list of cardviews
+                    return CardView(jsonData: jsonData[index]);
+                  }
+                },
+              );
 						}
 					},
 				),

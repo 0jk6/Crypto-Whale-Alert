@@ -22,31 +22,31 @@ class CryptoCardWidget extends StatelessWidget{
 						children: <Widget>[
               
               //Title or main tweet
-              GetTextWidget(title: this.tweet, value: "", font_size: 24, font_color: Colors.red, font_weight: FontWeight.bold),
-              Padding(padding: EdgeInsets.only(top:12)),
+              GetTextWidget(title: this.tweet, value: "", font_size: 18, font_color: Colors.white, font_weight: FontWeight.bold),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Hash of the transaction
-							GetTextWidget(title: "Hash: ", value: this.hash, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal),
-              Padding(padding: EdgeInsets.only(top:12)),
+							GetTextWidget(title: "Hash: ", value: this.hash, font_size: 12, font_color: Colors.amber, font_weight: FontWeight.normal),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Type of Blockchain
-							GetTextWidget(title: "Blockchain: ", value: this.blockchain, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal),
-              Padding(padding: EdgeInsets.only(top:12)),
+							GetTextWidget(title: "Blockchain: ", value: this.blockchain, font_size: 12, font_color: Colors.blue, font_weight: FontWeight.normal),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Amount of coins or tokens transferred
-              GetTextWidget(title: "Amount: ", value: this.amount, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal),
-              Padding(padding: EdgeInsets.only(top:12)),
+              GetTextWidget(title: "Amount: ", value: this.amount, font_size: 12, font_color: Colors.lime, font_weight: FontWeight.normal),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Amount in USD
-              GetTextWidget(title: "Amount in USD: ", value: this.amount_usd, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal),
-              Padding(padding: EdgeInsets.only(top:12)),
+              GetTextWidget(title: "Amount in USD: ", value: this.amount_usd, font_size: 12, font_color: Colors.lime, font_weight: FontWeight.normal),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Sender address
-              GetTextWidget(title: "From: ", value: this.from_address, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal),
-              Padding(padding: EdgeInsets.only(top:12)),
+              GetTextWidget(title: "From: ", value: this.from_address, font_size: 12, font_color: Colors.purple, font_weight: FontWeight.normal),
+              Padding(padding: EdgeInsets.only(top:6)),
 
               //Receiver address
-              GetTextWidget(title: "To: ", value: this.to_address, font_size: 16, font_color: Colors.white, font_weight: FontWeight.normal)							
+              GetTextWidget(title: "To: ", value: this.to_address, font_size: 12, font_color: Colors.purple, font_weight: FontWeight.normal)							
 						]
 					)
 				)
